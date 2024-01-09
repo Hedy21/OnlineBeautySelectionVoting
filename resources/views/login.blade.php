@@ -14,16 +14,24 @@
         <div class="bg-gradient-to-r from-purple-300 to-pink-300 col-start-1 col-span-9 sm:col-start-2 sm:col-span-7 md:col-start-3 md:col-span-5 lg:col-start-4 lg:col-span-3 xl:col-start-4 xl:col-span-3 xxl:col-start-4 xxl:col-span-3">
              <!-- login form -->
             <div class="h-fit m-5 bg-white border rounded">
-
-                <form class="m-5 p-5" action="{{route('login#save')}}" method="post" >
+                @if (Session::has('error'))
+                <p class="text-red-500 text-xs">{{ Session::get('error')}}</p>
+                @endif
+                <form class="m-5 p-5" action="{{route('login')}}" method="post" >
                     @csrf
                     <div class="font-bold text-xl text-purple-500 text-center mb-5">Login Here!</div>
                     <div class="mb-6">
                     <label for="email" class="block mb-2 text-sm font-medium text-purple-500 dark:text-white">Your email</label>
+                    @error('email')
+                    <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
                     <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg ring-1 ring-purple-500 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@ucstgi.edu.mm" required>
                     </div>
                     <div class="mb-6">
                     <label for="password" class="block mb-2 text-sm font-medium text-purple-500 dark:text-white">Password</label>
+                    @error('password')
+                    <p class="text-red-500 text-xs">{{ $message }}</p>
+                @enderror
                     <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg ring-1 ring-purple-500 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
 

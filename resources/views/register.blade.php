@@ -14,8 +14,10 @@
         <div class="bg-gradient-to-r from-purple-300 to-pink-300 col-start-1 col-span-9 sm:col-start-2 sm:col-span-7 md:col-start-3 md:col-span-5 lg:col-start-4 lg:col-span-3 xl:col-start-4 xl:col-span-3 xxl:col-start-4 xxl:col-span-3">
              <!-- register form -->
             <div class="h-fit m-5 bg-white border rounded">
-
-                <form class="m-5 p-5" action="{{route('register#save')}}" method="post" >
+                @if (Session::has('success'))
+                <p class="text-red-500 text-xs">{{ Session::get('success')}}</p>
+                @endif
+                <form class="m-5 p-5" action="{{route('register')}}" method="post" >
                     @csrf
                     <div class="font-bold text-xl text-purple-500 text-center mb-5">Register Here!</div>
                     <div class="mb-6">

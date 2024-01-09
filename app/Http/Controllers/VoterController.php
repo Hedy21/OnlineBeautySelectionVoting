@@ -4,22 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Voter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class VoterController extends Controller
 {
     public function login(Request $request){
-        $validationRules = [
-            'email'=>'required | email | ends_with:ucstgi.edu.mm | unique:voters,email',
-            'password'=>'required'
-        ];
-        $validationMessage = [
-            'email.ends_with'=>'You must be a student at UCSTgi.',
-            'email.unique' => 'This email is already in use'
-        ];
-        Validator::make($request->all(),$validationRules,$validationMessage)->validate();
-        dd($request->all());
+          // Attempt to authenticate the user
+    $credentials = $request->only('email', 'password');
+
+    if (Auth::attempt($credentials)) {
+        // Authentication passed, redirect to the desired page or show a success message
+        return redirect()->route('success#leaderboard')->with('success', 'Login successful!');
+    }
+        // Authentication failed, redirect back with an error message
+        return redirect()->back()->withErrors(['email' => 'Invalid email or password'])->withInput();
     }
 
     public function register(Request $request){
