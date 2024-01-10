@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="output.css" rel="stylesheet">
+  <meta name="csrf-token" content="{{csrf_token()}}">
+  {{-- jQuery link --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   @vite('resources/css/app.css')
 </head>
@@ -53,7 +57,7 @@
                 <!-- top selected avator -->
                 <div class="avatar">
                   <div class="sm:w-24 md:w-32 lg:w-32 xl:32 xxl:32 rounded-full ring ring-teal-500 ring-offset-base-100 ring-offset-2">
-                    <img src="images/IMG_5536.jpg" />
+                    <img src="{{asset('images/IMG_5547.jpg')}}" />
                   </div>
                 </div><br>
                 Myat Phoo Yoon
@@ -62,7 +66,7 @@
                 <!-- top selected avator -->
                 <div class="avatar">
                   <div class="sm:w-28 md:w-44 lg:w-44 xl:w-44 xxl:w-44 rounded-full ring ring-amber-400 ring-offset-base-100 ring-offset-2">
-                    <img src="images/IMG_2728.jpg" />
+                    <img src="{{asset('images/IMG_5547.jpg')}}" />
                   </div>
                 </div><br>
                 Su Paing Thae
@@ -72,7 +76,7 @@
                 <!-- top selected avator -->
                 <div class="avatar">
                   <div class="sm:w-24 md:w-32 lg:w-32 xl:32 xxl:32  rounded-full ring ring-pink-400 ring-offset-base-100 ring-offset-2">
-                    <img src="images/IMG_5537.JPG" />
+                    <img src="{{asset('images/IMG_9007.jpg')}}" />
                   </div>
                 </div><br>
                 Yoon Yoon
@@ -83,283 +87,75 @@
             <!-- parent div for grid for ranking -->
             <div class=" h-96 overflow-auto">
               <div class="grid grid-cols-7 gap-y-3 mt-5">
+                <!-- column 1 of grid -->
+                <div class="col-span-1 mb-6 flex justify-center items-center">
+                    <div class="text-2xl  font-serif mt-3 " id="s_id">1</div>
+
+                  </div>
+
+
+                  <!-- column 2 of grid -->
+                  <div class="col-span-4">
+
+                    <!-- flex for avator and name -->
+                    <div class="flex flex-row justify-start">
+                      <!-- flex item 1 -->
+                      <div class="basis-1/4">
+                        <div class="avatar">
+                          <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
+                            <a href="selectionPreview.html"><img src="{{asset('images/IMG_5547.jpg')}}" class=""/></a>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- flex item 2 -->
+
+                      <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" onclick="add()" data-tip="Click here to vote"><a href="{{url('preview')}}">Paing T Su</a></div></div>
+                    </div>
+                  </div>
+
+
+
+                  <!-- column 3 of grid -->
+                  <div class="col-span-2 mb-6 flex justify-center items-center">
+                    <div class="text-2xl mt-3 font-serif" id="no">255</div>
+                  </div>
                 <!-- Use loop here for selections list and ranks -->
-
-                <!-- column 1 of grid -->
+                @foreach ($data as $selection)
+                    <!-- column 1 of grid -->
                 <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">1</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/IMG_2728.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Su Paing Thae</a></div></div>
+                    <div class="text-2xl  font-serif mt-3 " id="s_id">{{$selection['id']}}</div>
+                    <input type="hidden" id="sid" value="{{$selection->id}}">
                   </div>
 
-                </div>
 
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">227</div>
-                </div>
-
-                <!-- delete these later start -->
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">2</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/IMG_5536.jpg" class=""/></a>
+                  <!-- column 2 of grid -->
+                  <div class="col-span-4">
+                    <form action="javascript:void(0)" id="voteForm" type="POST">
+                        <input type="hidden" id="id" value="{{$selection->id}}">
+                    <!-- flex for avator and name -->
+                    <div class="flex flex-row justify-start">
+                      <!-- flex item 1 -->
+                      <div class="basis-1/4">
+                        <div class="avatar">
+                          <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
+                            <a href="selectionPreview.html"><img src="{{asset($selection->image)}}" class=""/></a>
+                          </div>
                         </div>
                       </div>
+                      <!-- flex item 2 -->
+
+                      <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><button type="submit">{{$selection['name']}}</button></div></div>
                     </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Myat Phoo Yoon</a></div></div>
+                    </form>
                   </div>
 
-                </div>
 
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">225</div>
-                </div>
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">3</div>
-                </div>
 
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/IMG_5537.JPG" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Yoon Yoon</a></div></div>
+                  <!-- column 3 of grid -->
+                  <div class="col-span-2 mb-6 flex justify-center items-center">
+                    <div class="text-2xl mt-3 font-serif">{{$selection['votes']}}</div>
                   </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">200</div>
-                </div>
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">4</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/IMG_5547.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Su Su</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">152</div>
-                </div>
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">5</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/tsp1.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Thae Su Paing</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">122</div>
-                </div>
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">1</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/tsp1.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Thae Su Paing</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">122</div>
-                </div>
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">1</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/tsp1.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Thae Su Paing</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">122</div>
-                </div>
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">1</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/tsp1.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Thae Su Paing</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">122</div>
-                </div>
-
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">1</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/tsp1.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Thae Su Paing</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">122</div>
-                </div>
-
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                  <div class="text-2xl  font-serif mt-3 ">1</div>
-                </div>
-
-                <!-- column 2 of grid -->
-                <div class="col-span-4">
-                  <!-- flex for avator and name -->
-                  <div class="flex flex-row justify-start">
-                    <!-- flex item 1 -->
-                    <div class="basis-1/4">
-                      <div class="avatar">
-                        <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                          <a href="selectionPreview.html"><img src="images/tsp1.jpg" class=""/></a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- flex item 2 -->
-                    <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" data-tip="Click here to vote"><a href="selectionPreview.html">Thae Su Paing</a></div></div>
-                  </div>
-
-                </div>
-
-                <!-- column 3 of grid -->
-                <div class="col-span-2 mb-6 flex justify-center items-center">
-                  <div class="text-2xl mt-3 font-serif">122</div>
-                </div>
-                <!-- delete these later end -->
+                @endforeach
               </div>
             </div>
           </div>
@@ -367,7 +163,46 @@
       </div>
     </div>
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'x-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            add();
+        });
+        function add(){
+            setTimeout(function() {
+            // Get the current value
+            var currentValue = parseInt($('#no').text());
 
+            // Increment the value by 1
+            var newValue = currentValue + 1;
+
+            // Update the text content of the element with the new value
+            $('#no').text(newValue);
+        }, 7000);
+        }
+        $('#voteForm').submit(function(e){
+            var id = $('#id').val();
+            var sid = $('#sid').val();
+            alert(sid);
+            $.ajax({
+                type: "POST",
+                url: "{{ url('vote') }}",
+                data : {id:id},
+                dataType: 'json',
+                success: function(res){
+                  console.log(res);
+                },
+                error: function(){
+                    console.log("try again");
+                }
+            });
+        });
+
+    </script>
 
 </body>
 </html>

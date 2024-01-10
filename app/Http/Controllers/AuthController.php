@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Voter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +14,10 @@ class AuthController extends Controller
         return view('register');
     }
     public function registerPost(Request $request){
-        $user = new Voter();
+        $user = new User();
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->noOfVote = 1;
         $user->save();
         return view('login')->with('success','Register successfully');
     }
@@ -24,12 +26,12 @@ class AuthController extends Controller
         return view('login');
     }
     public function loginPost(Request $request){
-        $user = Voter::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
         if($user && Hash::check($request->password, $user->password)){
             Auth::login($user);
             \Log::info('Login successful');
-            return view('leaderboard');
+            return redirect()->route('leaderboard');
         }
 
         \Log::info('Login failed: ' . $request->email);
