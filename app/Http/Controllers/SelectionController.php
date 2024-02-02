@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Selection;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class SelectionController extends Controller
 {
     public function selectionForm(){
@@ -12,6 +12,7 @@ class SelectionController extends Controller
     }
     public function selectionFormUpload(Request $req){
         $data = $req->all();
+        Storage::disk('local')->put('example.txt','Contents');
         $fileName = time().$req->file('image')->getClientOriginalName();
         $path = $req->file('image')->storeAs('images',$fileName,'public');
         $data["image"] = '/storage/'.$path;

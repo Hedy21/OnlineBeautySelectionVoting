@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\VoterController;
 use App\Http\Controllers\SelectionController;
+use App\Http\Controllers\ComponentTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,5 +44,12 @@ Route::post('voted',[SelectionController::class,'voted'])->name('voted');
 // Route::get('leaderboard',[VoteController::class,'leaderboard'])->name('success#leaderboard');
 // Route::get('kingForm',[VoteController::class,'kingForm']);
 // Route::get('queenForm',[VoteController::class,'queenForm']);
+
+
+Route::controller(ComponentTestController::class)->group(function(){
+    Route::get('/imageUpload','imageUpload');
+    Route::post('/imageUpload','storeImage');
+    Route::get('/showImages','showImages')->name('showImages');
+});
 
 
