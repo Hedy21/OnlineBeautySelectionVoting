@@ -87,38 +87,7 @@
             <!-- parent div for grid for ranking -->
             <div class=" h-96 overflow-auto">
               <div class="grid grid-cols-7 gap-y-3 mt-5">
-                <!-- column 1 of grid -->
-                <div class="col-span-1 mb-6 flex justify-center items-center">
-                    <div class="text-2xl  font-serif mt-3 " id="s_id">1</div>
-
-                  </div>
-
-
-                  <!-- column 2 of grid -->
-                  <div class="col-span-4">
-
-                    <!-- flex for avator and name -->
-                    <div class="flex flex-row justify-start">
-                      <!-- flex item 1 -->
-                      <div class="basis-1/4">
-                        <div class="avatar">
-                          <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                            <a href="selectionPreview.html"><img src="{{asset('images/IMG_5547.jpg')}}" class=""/></a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- flex item 2 -->
-
-                      <div class="sm:text-lg md:text-xl lg:text-xl font-serif  self-center"><div class="tooltip" onclick="add()" data-tip="Click here to vote"><a href="{{url('preview')}}">Paing T Su</a></div></div>
-                    </div>
-                  </div>
-
-
-
-                  <!-- column 3 of grid -->
-                  <div class="col-span-2 mb-6 flex justify-center items-center">
-                    <div class="text-2xl mt-3 font-serif" id="no">255</div>
-                  </div>
+               
                 <!-- Use loop here for selections list and ranks -->
                 @foreach ($data as $selection)
                     <!-- column 1 of grid -->
