@@ -6,6 +6,7 @@ use App\Models\Selection;
 use Illuminate\Http\Request;
 use App\Models\MaleSelection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class SelectionController extends Controller
 {
@@ -13,7 +14,14 @@ class SelectionController extends Controller
         return view('queenSelectionsUploadForm');
     }
     public function selectionFormUpload(Request $req){
-        $data = $req->all();
+        $data = $req->validate([
+            'name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg'
+        ],[
+           'image.image' => 'the input file should be an image',
+           'image.mimes' => ''
+        ]);
+       
         Storage::disk('local')->put('example.txt','Contents');
         $fileName = time().$req->file('image')->getClientOriginalName();
         $path = $req->file('image')->storeAs('images',$fileName,'public');
@@ -65,7 +73,15 @@ class SelectionController extends Controller
         return view('kingSelectionsUploadForm');
     }
     public function selectionFormUpload2(Request $request){
-        $data = $request->all();
+         $data = $request->validate([
+             'name' => 'required',
+             'image' => 'required|image|mimes:jpeg,png,jpg'
+         ],[
+            'image.image' => 'the input file should be an image',
+            'image.mimes' => ''
+         ]);
+        
+        //$data = $request->all();
         $fileName = time().$request->file('image')->getClientOriginalName();
         $path = $request->file('image')->storeAs('images',$fileName,'public');
         $data["image"] = '/storage/'.$path;

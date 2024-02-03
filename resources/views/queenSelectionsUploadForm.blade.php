@@ -46,7 +46,12 @@
         <div class="bg-gradient-to-r from-purple-300 to-pink-300 col-start-1 col-span-9 sm:col-start-2 sm:col-span-7 md:col-start-3 md:col-span-5 lg:col-start-4 lg:col-span-3 xl:col-start-4 xl:col-span-3 xxl:col-start-4 xxl:col-span-3">
              <!-- register form -->
             <div class="h-fit m-5 bg-white border rounded">
-
+              @error('image')
+                <div id="errorMessage" class="bg-red-400 p-3 rounded-lg m-1 flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" onclick="closeErrorMessage()" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span class="ms-2 text-white">{{$message}}</span>
+                </div>
+                @enderror
                 <form class="m-5 p-5" action="{{route('selectionFormUpload')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="font-bold text-xl text-purple-500 text-center mb-5">Upload Queen Selections</div>
@@ -69,6 +74,11 @@
             </div>
         </div>
     </div>
-
+    <script>
+      function closeErrorMessage(){
+        var errorDiv = document.getElementById('errorMessage');
+        errorDiv.style.display = 'none';
+      }
+    </script>
 </body>
 </html>
