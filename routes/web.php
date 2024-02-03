@@ -27,9 +27,15 @@ Route::post('/register',[AuthController::class,'registerPost'])->name('register'
 Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::post('/login',[AuthController::class,'loginPost'])->name('login');
 
+//for queen selections
 Route::get('/leaderboard',[SelectionController::class,'leaderboard'])->name('leaderboard');
 Route::get('/selectionForm',[SelectionController::class,'selectionForm'])->name('selectionForm');
 Route::post('/selectionFormUpload',[SelectionController::class,'selectionFormUpload'])->name('selectionFormUpload');
+
+//for king selections
+Route::get('/leaderboard2',[SelectionController::class,'leaderboard2'])->name('leaderboard2');
+Route::get('/selectionForm2',[SelectionController::class,'selectionForm2'])->name('selectionForm2');
+Route::post('/selectionFormUpload2',[SelectionController::class,'selectionFormUpload2'])->name('selectionFormUpload2');
 
 Route::post('vote',[SelectionController::class,'vote'])->name('vote');
 Route::get('preview',[SelectionController::class,'preview'])->name('preview');

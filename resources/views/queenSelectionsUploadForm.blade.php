@@ -55,7 +55,7 @@
                     <input type="name" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg ring-1 ring-purple-500 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
                     </div>
                     <div class="mb-6">
-                        <input type="file" name="image" class="file-input w-full max-w-xs" />
+                        <input type="file" name="image" class="file-input w-full max-w-xs"  required/>
                     </div>
 
                     <div class="grid grid-cols-4">

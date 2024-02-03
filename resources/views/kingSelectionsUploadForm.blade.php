@@ -47,14 +47,15 @@
              <!-- register form -->
             <div class="h-fit m-5 bg-white border rounded">
 
-                <form class="m-5 p-5" action="selectionPreview.html" method="" >
+                <form class="m-5 p-5" action="{{route('selectionFormUpload2')}}" method="POST" enctype="multipart/form-data">
+                  @csrf
                     <div class="font-bold text-xl text-purple-500 text-center mb-5">Upload King Selections</div>
                     <div class="mb-6">
                     <label for="name" class="block mb-2 text-sm font-medium text-purple-500 dark:text-white">Name</label>
-                    <input type="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg ring-1 ring-purple-500 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
+                    <input type="name" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg ring-1 ring-purple-500 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required>
                     </div>
                     <div class="mb-6">
-                        <input type="file" class="file-input file-input-bordered file-input-md file-input- w-full max-w-xs" />
+                        <input type="file" name="image" class="file-input file-input-bordered file-input-md file-input- w-full max-w-xs" required/>
                     </div>
 
                     <div class="grid grid-cols-4">
