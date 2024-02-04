@@ -37,9 +37,16 @@ Route::get('/leaderboard2',[SelectionController::class,'leaderboard2'])->name('l
 Route::get('/selectionForm2',[SelectionController::class,'selectionForm2'])->name('selectionForm2');
 Route::post('/selectionFormUpload2',[SelectionController::class,'selectionFormUpload2'])->name('selectionFormUpload2');
 
+//selection preview
+Route::get('/items/{id}',[SelectionController::class,'previewSelection'])->name('selection#show');
+
+//vote count
+Route::post('/voted', [SelectionController::class, 'votedHer'])->name('voted');
+
+
 Route::post('vote',[SelectionController::class,'vote'])->name('vote');
 Route::get('preview',[SelectionController::class,'preview'])->name('preview');
-Route::post('voted',[SelectionController::class,'voted'])->name('voted');
+Route::post('selection/{id}',[SelectionController::class,'votedHer'])->name('voted');
 
 // Route::get('login',[VoteController::class,'login']);
 // Route::post('loginSave',[VoterController::class,'login'])->name('login#save');

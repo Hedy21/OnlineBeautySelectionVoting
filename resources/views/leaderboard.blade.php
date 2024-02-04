@@ -107,7 +107,7 @@
                       <div class="basis-1/4">
                         <div class="avatar">
                           <div class="sm:w-14 md:w-16 lg:w-16 xl:w-16 xxl:w-16 rounded-full">
-                            <a href="selectionPreview.html"><img src="{{asset($selection->image)}}" class=""/></a>
+                            <a href="{{route('selection#show',['id'=>$selection->id])}}"><img src="{{asset($selection->image)}}" class=""/></a>
                           </div>
                         </div>
                       </div>

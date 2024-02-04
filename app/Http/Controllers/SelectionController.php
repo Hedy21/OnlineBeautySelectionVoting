@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Selection;
 use Illuminate\Http\Request;
 use App\Models\MaleSelection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -88,5 +89,36 @@ class SelectionController extends Controller
         $data["votes"] = 0;
         MaleSelection::create($data);
         return redirect('leaderboard2');
+    }
+
+    //selection preview
+    public function previewSelection($id){
+        $idData = Selection::find($id)->toArray();
+        //dd($idData);
+       return view('previewSelection',compact('idData'));
+    }
+    
+    public function votedHer($id){
+        if (auth()->check()) {
+            // User is authenticated
+        $user = Auth::user();
+
+        // Update the noOfVote column to 0 in the database
+        $user->update(['noOfVote' => 0]);
+
+        // Fetch the updated user object
+        $updatedUser = Auth::user();
+        
+        //add one vote to the selection with respective id
+            $selection = Selection::find($id);
+            $votesIncrease = $selection->increment('votes');
+        
+        // go back to leaderboard
+        return redirect('leaderboard');
+
+        } else {
+            // User is not authenticated
+            dd('User not authenticated');
+        }
     }
 }
