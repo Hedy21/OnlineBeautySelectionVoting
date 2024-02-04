@@ -41,6 +41,12 @@
                             <div class="carousel-item" id="item2">
                                 <div class="bg-white border rounded-sm max-w-md">
                                 <img src="{{asset($idData['image'])}}" class="rounded-l-3xl bg-clip-border"/>
+                                @if(session('message'))
+                                <div role="alert" id="alertMessage" class="alert alert-error">
+                                  <svg xmlns="http://www.w3.org/2000/svg"  onclick="closeAlert()" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                  <span>{{session('message')}}</span>
+                                </div>
+                                @endif
                                 </div>
                             </div>
                         </div>
@@ -69,5 +75,10 @@
         </div>
     </div>
 
+    <script>
+      function closeAlert(){
+        document.getElementById('alertMessage').style.display = 'none';
+      }
+    </script>
 </body>
 </html>

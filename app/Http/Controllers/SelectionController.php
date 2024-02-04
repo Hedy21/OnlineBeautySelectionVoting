@@ -98,27 +98,67 @@ class SelectionController extends Controller
        return view('previewSelection',compact('idData'));
     }
     
-    public function votedHer($id){
-        if (auth()->check()) {
-            // User is authenticated
+    // public function votedHer($id){
+    //     if (auth()->check()) {
+    //         // User is authenticated
+    //     $user = Auth::user();
+
+    //     // Update the noOfVote column to 0 in the database
+    //     $user->update(['noOfVote' => 0]);
+
+    //     // Fetch the updated user object
+    //     $updatedUser = Auth::user();
+        
+    //     //add one vote to the selection with respective id
+    //         if($user->noOfVote == 1){
+    //             $selection = Selection::find($id);
+    //             $votesIncrease = $selection->increment('votes');
+    //             //return redirect('leaderboard');
+    //         }else{
+    //             //return back()->with('message',"you can vote only once");
+    //             dd("you can vote only once");
+    //         }
+    //         return redirect('leaderboard');
+    //     // go back to leaderboard
+        
+
+    //     } else {
+    //         // User is not authenticated
+    //         dd('User not authenticated');
+    //     }
+    // }
+
+    public function votedHer($id)
+{
+    if (auth()->check()) {
+        // User is authenticated
         $user = Auth::user();
 
-        // Update the noOfVote column to 0 in the database
-        $user->update(['noOfVote' => 0]);
+        // Check if the user already voted
+        if ($user->noOfVote == 1) {
+            // Start a database transaction
+            \DB::transaction(function () use ($user, $id) {
+                // Update the noOfVote column to 0 in the database
+                $user->update(['noOfVote' => 0]);
 
-        // Fetch the updated user object
-        $updatedUser = Auth::user();
-        
-        //add one vote to the selection with respective id
-            $selection = Selection::find($id);
-            $votesIncrease = $selection->increment('votes');
-        
-        // go back to leaderboard
-        return redirect('leaderboard');
+                // Fetch the updated user object
+                $updatedUser = Auth::user();
 
+                // Add one vote to the selection with the respective ID
+                $selection = Selection::find($id);
+                $votesIncrease = $selection->increment('votes');
+            });
+
+            // Redirect to the leaderboard
+            return redirect('leaderboard');
         } else {
-            // User is not authenticated
-            dd('User not authenticated');
+            // User already voted
+            return back()->with('message', 'You can vote only once');
         }
+    } else {
+        // User is not authenticated
+        dd('User not authenticated');
     }
+}
+
 }
